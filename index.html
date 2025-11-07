@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для моей любимой ❤️</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Анимированные частицы на фоне -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Главная страница приветствия -->
+    <div class="page active" id="welcome-page">
+        <div class="welcome-container">
+            <h1 class="main-title">Рита, поздравляю с днем рождения!!! 🎉</h1>
+            <p class="subtitle">Я приготовил для тебя интересное... приключение. У тебя откроется карта, на которой будут показаны места в Орхусе, возможно знакомые нам, возможно не очень. В каждом таком месте я спрятал пакетик с QR-кодом. Эти коды содержат в себе шифр, который нужно ввести на сайте чтобы разблокировать следующую локацию. Удачи тебе, любимая!</p>
+            <div class="heart-animation">❤️</div>
+            <button class="btn-primary" onclick="startAdventure()">Тык, чтобы открыть карту</button>
+        </div>
+    </div>
+
+    <!-- Страница с картой -->
+    <div class="page" id="map-page">
+        <div class="header">
+            <h2>Карта. Люблю тебя, солнышко.</h2>
+            <div class="progress-container">
+                <span class="progress-text">Открыто: <span id="unlocked-count">0</span>/<span id="total-count">0</span></span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="map"></div>
+        
+        <div class="controls">
+            <button class="btn-secondary" onclick="showUnlockForm()">Ввести код</button>
+            <button class="btn-secondary" onclick="showMessages()">Открытые локации</button>
+        </div>
+    </div>
+
+    <!-- Форма ввода кода -->
+    <div class="modal" id="unlock-modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeUnlockForm()">&times;</span>
+            <h2>Введи секретный код</h2>
+            <p>Код находится на QR-коде💝</p>
+            <input type="text" id="secret-code" placeholder="Введи код..." maxlength="20">
+            <button class="btn-primary" onclick="unlockLocation()">Открыть</button>
+            <div class="error-message" id="error-message"></div>
+        </div>
+    </div>
+
+    <!-- Модальное окно сообщения -->
+    <div class="modal" id="message-modal">
+        <div class="modal-content message-content">
+            <span class="close" onclick="closeMessage()">&times;</span>
+            <div class="confetti" id="confetti"></div>
+            <h2 id="message-title"></h2>
+            <p id="message-text"></p>
+            <div class="location-icon">📍</div>
+        </div>
+    </div>
+
+    <!-- Список открытых сообщений -->
+    <div class="modal" id="messages-modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeMessages()">&times;</span>
+            <h2>Твои открытые воспоминания</h2>
+            <div id="messages-list"></div>
+        </div>
+    </div>
+
+    <!-- Финальная страница -->
+    <div class="page" id="final-page">
+        <div class="final-container">
+            <div class="big-confetti" id="big-confetti"></div>
+            <h1 class="final-title">Ты прошла весь путь! 🎊</h1>
+            <p class="final-message" id="final-message"></p>
+            <div class="heart-explosion">
+                <span>❤️</span><span>💕</span><span>💖</span><span>💗</span>
+                <span>💓</span><span>💝</span><span>💘</span><span>💞</span>
+            </div>
+            <button class="btn-primary" onclick="backToMap()">Вернуться к карте</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/unlock.js"></script>
+</body>
+</html>
+
