@@ -121,7 +121,7 @@ function animateDashArray() {
             offset -= 1;
             polyline.setStyle({ dashOffset: offset });
         }
-    }, 50);
+    }, 100);
 }
 
 // Обновить прогресс

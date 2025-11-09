@@ -68,7 +68,7 @@ function unlockLocation() {
         // Показать сообщение с задержкой
         setTimeout(() => {
             showLocationMessage(location);
-        }, 800);
+        }, 400);
         
     } else {
         // Проверить, может код уже использован
