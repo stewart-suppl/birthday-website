@@ -25,11 +25,11 @@ body {
 }
 h1 { text-align:center; color:var(--dark-brown); margin-bottom:8px; font-size:1.8em; }
 .subtitle { text-align:center; color:var(--warm-brown); margin-bottom:20px; font-size:0.85em; }
-.board { display:flex; flex-direction:column; gap:6px; margin-bottom:20px; align-items:center; }
-.row { display:grid; gap:6px; }
+.board { display:flex; flex-direction:column; gap:6px; margin-bottom:20px; align-items:center; width: 100%; max-width: 100%; overflow-x: auto; padding: 0 5px; }
+.row { display:grid; gap:4px; width: fit-content; margin: 0 auto; }
 .tile {
-    width:40px; height:40px; border:2px solid var(--beige); border-radius:6px; display:flex; align-items:center;
-    justify-content:center; font-size:1.3em; font-weight:bold; text-transform:uppercase; transition:all 0.3s ease; background:white;
+    width:26px; height:26px; border:2px solid var(--beige); border-radius:4px; display:flex; align-items:center;
+    justify-content:center; font-size:0.95em; font-weight:bold; text-transform:uppercase; transition:all 0.3s ease; background:white;
     color: #111;
 }
 .tile.filled { border-color:var(--warm-brown); animation: pop 0.1s ease-in-out; }
@@ -76,7 +76,7 @@ h1 { text-align:center; color:var(--dark-brown); margin-bottom:8px; font-size:1.
     .game-container { padding: 40px; }
     h1 { font-size:2.5em; margin-bottom:10px; }
     .subtitle { margin-bottom:30px; font-size:0.9em; }
-    .board { gap:8px; margin-bottom:30px; }
+    .board { gap:8px; margin-bottom:30px; padding: 0; }
     .row { gap:8px; }
     .tile { width:60px; height:60px; font-size:1.8em; border-radius:8px; }
     .keyboard { gap:8px; max-width:700px; }
@@ -91,9 +91,21 @@ h1 { text-align:center; color:var(--dark-brown); margin-bottom:8px; font-size:1.
 /* Small phones */
 @media (max-width:360px) {
     h1 { font-size:1.5em; }
-    .tile { width:32px; height:32px; font-size:1.1em; }
+    .tile { width:22px; height:22px; font-size:0.85em; }
+    .row { gap:3px; }
     .key { padding:10px 2px; min-width:22px; font-size:0.65em; }
     .key.wide { min-width:38px; font-size:0.6em; }
+}
+
+/* Medium phones */
+@media (min-width:361px) and (max-width:420px) {
+    .tile { width:28px; height:28px; font-size:1em; }
+}
+
+/* Larger phones */
+@media (min-width:421px) and (max-width:767px) {
+    .tile { width:35px; height:35px; font-size:1.2em; }
+    .row { gap:5px; }
 }
 </style>
 </head>
