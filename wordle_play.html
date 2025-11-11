@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>Игра в слова 🎮</title>
 <style>
 :root {
@@ -17,19 +17,19 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, var(--warm-brown) 0%, var(--dark-brown) 100%);
-    min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px;
+    min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 10px;
 }
 .game-container {
-    background: var(--cream); border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    background: var(--cream); border-radius: 20px; padding: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     max-width: 1000px; width: 100%;
 }
-h1 { text-align:center; color:var(--dark-brown); margin-bottom:10px; font-size:2.5em; }
-.subtitle { text-align:center; color:var(--warm-brown); margin-bottom:30px; font-size:0.9em; }
-.board { display:flex; flex-direction:column; gap:8px; margin-bottom:30px; align-items:center; }
-.row { display:grid; gap:8px; }
+h1 { text-align:center; color:var(--dark-brown); margin-bottom:8px; font-size:1.8em; }
+.subtitle { text-align:center; color:var(--warm-brown); margin-bottom:20px; font-size:0.85em; }
+.board { display:flex; flex-direction:column; gap:6px; margin-bottom:20px; align-items:center; }
+.row { display:grid; gap:6px; }
 .tile {
-    width:60px; height:60px; border:2px solid var(--beige); border-radius:8px; display:flex; align-items:center;
-    justify-content:center; font-size:1.8em; font-weight:bold; text-transform:uppercase; transition:all 0.3s ease; background:white;
+    width:40px; height:40px; border:2px solid var(--beige); border-radius:6px; display:flex; align-items:center;
+    justify-content:center; font-size:1.3em; font-weight:bold; text-transform:uppercase; transition:all 0.3s ease; background:white;
     color: #111;
 }
 .tile.filled { border-color:var(--warm-brown); animation: pop 0.1s ease-in-out; }
@@ -39,29 +39,30 @@ h1 { text-align:center; color:var(--dark-brown); margin-bottom:10px; font-size:2
 @keyframes pop { 0%,100%{transform:scale(1);}50%{transform:scale(1.1);} }
 @keyframes flip { 0%{transform:rotateX(0);}50%{transform:rotateX(90deg);}100%{transform:rotateX(0);} }
 
-.keyboard { display:flex; flex-direction:column; gap:8px; max-width:700px; margin:0 auto; }
-.keyboard-row { display:flex; gap:6px; justify-content:center; }
+.keyboard { display:flex; flex-direction:column; gap:6px; max-width:100%; margin:0 auto; }
+.keyboard-row { display:flex; gap:4px; justify-content:center; }
 .key {
-    padding:15px 10px; min-width:40px; background:var(--beige); border:none; border-radius:6px; font-size:0.85em;
+    padding:12px 4px; min-width:26px; background:var(--beige); border:none; border-radius:4px; font-size:0.7em;
     font-weight:bold; text-transform:uppercase; cursor:pointer; transition:all 0.1s ease; color:var(--dark-brown);
+    flex: 1; max-width: 40px;
 }
 .key:hover { background:var(--soft-yellow); }
 .key:active { transform:scale(0.95); }
-.key.wide { min-width:65px; font-size:0.75em; }
+.key.wide { min-width:45px; font-size:0.65em; max-width: 60px; }
 .key.correct { background:#6aaa64; color:white; }
 .key.present { background:#c9b458; color:white; }
 .key.absent { background:#787c7e; color:white; }
 
-.message { text-align:center; padding:15px; margin-bottom:20px; border-radius:10px; font-weight:bold; display:none; }
+.message { text-align:center; padding:12px; margin-bottom:15px; border-radius:10px; font-weight:bold; display:none; font-size:0.9em; }
 .message.show { display:block; animation: slideDown 0.3s ease; }
 .message.success { background:#6aaa64; color:white; }
 .message.info { background:#c9b458; color:white; }
 .message.error { background:#787c7e; color:white; }
 @keyframes slideDown { from{opacity:0; transform:translateY(-20px);} to{opacity:1; transform:translateY(0);} }
 
-.stats { text-align:center; color:var(--dark-brown); margin-top:20px; font-size:0.9em; }
-.reset-btn { display:block; margin:20px auto 0; padding:12px 30px; background:var(--dark-brown); color:var(--cream);
-    border:none; border-radius:8px; font-size:1em; font-weight:bold; cursor:pointer; transition:all 0.2s ease; }
+.stats { text-align:center; color:var(--dark-brown); margin-top:15px; font-size:0.85em; }
+.reset-btn { display:block; margin:15px auto 0; padding:10px 25px; background:var(--dark-brown); color:var(--cream);
+    border:none; border-radius:8px; font-size:0.95em; font-weight:bold; cursor:pointer; transition:all 0.2s ease; }
 .reset-btn:hover { background:var(--accent-gold); transform:translateY(-2px); }
 
 .loading-overlay { position: fixed; inset:0; display:flex; align-items:center; justify-content:center;
@@ -70,10 +71,29 @@ h1 { text-align:center; color:var(--dark-brown); margin-bottom:10px; font-size:2
 .loading-box { background: var(--cream); color: var(--dark-brown); padding: 18px 26px; border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.4); font-weight: bold; }
 
-@media (max-width:768px) {
-    .tile { width:50px; height:50px; font-size:1.5em; }
-    .key { padding:12px 6px; min-width:32px; font-size:0.75em; }
-    .key.wide { min-width:55px; }
+/* Desktop styles */
+@media (min-width:768px) {
+    .game-container { padding: 40px; }
+    h1 { font-size:2.5em; margin-bottom:10px; }
+    .subtitle { margin-bottom:30px; font-size:0.9em; }
+    .board { gap:8px; margin-bottom:30px; }
+    .row { gap:8px; }
+    .tile { width:60px; height:60px; font-size:1.8em; border-radius:8px; }
+    .keyboard { gap:8px; max-width:700px; }
+    .keyboard-row { gap:6px; }
+    .key { padding:15px 10px; min-width:40px; font-size:0.85em; border-radius:6px; max-width: none; }
+    .key.wide { min-width:65px; font-size:0.75em; max-width: none; }
+    .message { padding:15px; margin-bottom:20px; font-size:1em; }
+    .stats { margin-top:20px; font-size:0.9em; }
+    .reset-btn { margin:20px auto 0; padding:12px 30px; font-size:1em; }
+}
+
+/* Small phones */
+@media (max-width:360px) {
+    h1 { font-size:1.5em; }
+    .tile { width:32px; height:32px; font-size:1.1em; }
+    .key { padding:10px 2px; min-width:22px; font-size:0.65em; }
+    .key.wide { min-width:38px; font-size:0.6em; }
 }
 </style>
 </head>
@@ -303,19 +323,13 @@ function loadGameState(){
     }catch(e){ console.error('Bad save',e); return false; }
 }
 
-/* ---------- RENDER LOADED STATE ----------
-   IMPORTANT FIX: do NOT call createBoard() here — that would reset boardState
-   after it was loaded from storage. Instead rebuild the DOM according to boardState.
-*/
 function renderLoadedState(){
     const board=document.getElementById('board');
     board.innerHTML='';
 
-    // Ensure there are at least INITIAL_ROWS rows (keep loaded rows if present)
     if(!Array.isArray(boardState)) boardState = [];
     while(boardState.length < INITIAL_ROWS) boardState.push(createEmptyRowState());
 
-    // Build each row from boardState
     for(let r=0;r<boardState.length;r++){
         const row=document.createElement('div');
         row.className='row';
@@ -335,10 +349,8 @@ function renderLoadedState(){
         board.appendChild(row);
     }
 
-    // Create keyboard now so updateKeyboardVisuals can style keys
     createKeyboard();
 
-    // Apply guessed words coloring and keyboard states
     guessedWords.forEach((g,ri)=>{
         const target=TARGET_WORD.split('');
         const arr=g.split('');
@@ -350,14 +362,12 @@ function renderLoadedState(){
             const tile=document.getElementById(`tile-${ri}-${i}`);
             if(tile){
                 tile.classList.add(res[i],'filled');
-                // ensure letter is visible (in case it wasn't saved into boardState)
                 if(!tile.textContent) tile.textContent = arr[i];
                 updateKeyboardVisuals(arr[i],res[i]);
             }
         }
     });
 
-    // Also restore keyboardState in case there are states from a partially played game
     Object.keys(keyboardState).forEach(letter=>{
         updateKeyboardVisuals(letter, keyboardState[letter]);
     });
@@ -390,4 +400,3 @@ initGame();
 </script>
 </body>
 </html>
-
